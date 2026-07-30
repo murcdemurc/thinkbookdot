@@ -2,23 +2,15 @@
 - name: Install essential pacman packages
   ansible.builtin.package:
     name:
-	- thunderbird
-	- reaper
-	- waydroid
-	- flatpak 
+      - thunderbird
+      - reaper
+      - waydroid
+      - flatpak
     state: present
 
-- name: Install AUR packages
-  become: false
-  ansible.builtin.command:
-    cmd: paru -S --noconfirm {{ item }}
-  loop:
-	- onlyoffice-bin
-	- deezer
-	- 
 
 - name: Install Flatpak applications
   community.general.flatpak:
     name:
-      - com.xair.xAirEdit
+      - com.behringer.XAirEdit
     state: present

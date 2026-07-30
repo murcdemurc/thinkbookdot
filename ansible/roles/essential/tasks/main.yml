@@ -12,7 +12,6 @@
       - pipewire
       - wireplumber
       - mesa
-      - radeon-vulkan
       - power-profiles-daemon
       - bluez
 
@@ -50,10 +49,9 @@
   when: paru_check.rc != 0
   become: false
 
-- name: Install AUR packages
+- name: Remove paru build directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/paru"
+    state: absent
+  when: paru_check.rc != 0
   become: false
-  kewlfft.aur.aur:
-    name:
-      - librewolf
-      - noctalia-git
-    state: present

@@ -1,0 +1,10 @@
+---
+- name: Install AUR packages
+  kewlfft.aur.aur:
+    name:
+      - librewolf-bin
+      - noctalia-git
+      - onlyoffice-bin
+      - deezer
+    use: paru
+  become: false

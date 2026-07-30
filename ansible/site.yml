@@ -2,9 +2,27 @@
   hosts: localhost
   connection: local
   become: true
+  gather_facts: true
 
+  vars:
+    install_essential: true
+    install_aur: true
+    install_gaming: false
+    install_productivity: true
+    install_ltr: true
+ 
   roles:
-    - essential
-    ## - gaming
-    - productivity
-    - ltr
+    - role: essential
+      when: install_essential | bool
+
+    - role: aur
+      when: install_aur | bool
+
+    - role: gaming
+      when: install_gaming | bool
+
+    - role: productivity
+      when: install_productivity | bool
+
+    - role: ltr
+      when: install_ltr | bool
