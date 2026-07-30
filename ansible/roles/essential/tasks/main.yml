@@ -22,6 +22,29 @@
 
     state: present
 
+- name: Enable system services
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    daemon_reload: true
+  loop:
+    - sddm
+    - NetworkManager
+    - bluetooth
+
+- name: Enable user services (pipewire)
+  become: false
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    scope: user
+    daemon_reload: true
+  loop:
+    - pipewire
+    - wireplumber
+    - pipewire-pulse
+
 - name: Ensure /etc/sudoers.d exists
   become: true
   ansible.builtin.file:

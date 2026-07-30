@@ -2,5 +2,6 @@
 
 sudo cp "{{ .chezmoi.sourceDir }}/grub/grub" /etc/default/grub
 
-sudo cp -r "{{ .chezmoi.sourceDir }}/grub/themes/nord" /boot/grub/themes/
+sudo mkdir -p /usr/share/grub/themes
+sudo cp -r "{{ .chezmoi.sourceDir }}/grub/themes/nord" /usr/share/grub/themes/
 sudo grub-mkconfig -o /boot/grub/grub.cfg
