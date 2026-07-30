@@ -1,5 +1,5 @@
 {
-  "change_serial": 160,
+  "change_serial": 172,
   "entries": [
     {
       "active": false,
@@ -1107,8 +1107,143 @@
         "urgency": "normal"
       },
       "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 162,
+      "notification": {
+        "actions": [],
+        "app_name": "Nextcloud",
+        "body": "",
+        "category": null,
+        "desktop_entry": "com.nextcloud.desktopclient.nextcloud",
+        "expiry_wall_ms": 1785413952831,
+        "icon": "Nextcloud",
+        "id": 65,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1785413946831,
+        "summary": "Eine Aktualisierung für Team Folders auf Version 21.0.13 ist verfügbar.",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 164,
+      "notification": {
+        "actions": [],
+        "app_name": "Nextcloud",
+        "body": "",
+        "category": null,
+        "desktop_entry": "com.nextcloud.desktopclient.nextcloud",
+        "expiry_wall_ms": 1785417994988,
+        "icon": "Nextcloud",
+        "id": 66,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1785417988988,
+        "summary": "Eine Aktualisierung für Team Folders auf Version 21.0.13 ist verfügbar.",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 166,
+      "notification": {
+        "actions": [],
+        "app_name": "Nextcloud",
+        "body": "",
+        "category": null,
+        "desktop_entry": "com.nextcloud.desktopclient.nextcloud",
+        "expiry_wall_ms": 1785426858669,
+        "icon": "Nextcloud",
+        "id": 67,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1785426852669,
+        "summary": "Eine Aktualisierung für Team Folders auf Version 21.0.13 ist verfügbar.",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 168,
+      "notification": {
+        "actions": [],
+        "app_name": "Nextcloud",
+        "body": "",
+        "category": null,
+        "desktop_entry": "com.nextcloud.desktopclient.nextcloud",
+        "expiry_wall_ms": 1785429045418,
+        "icon": "Nextcloud",
+        "id": 68,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1785429039418,
+        "summary": "Eine Aktualisierung für Team Folders auf Version 21.0.13 ist verfügbar.",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": true,
+      "close_reason": null,
+      "event_serial": 170,
+      "notification": {
+        "actions": [
+          "app.enable-pref::disable-connected-notifications",
+          "Diesen Hinweis nicht mehr anzeigen"
+        ],
+        "app_name": "Netzwerk-Manager-Applet",
+        "body": "Sie sind nun mit dem Funknetzwerk »FRITZ!Box Fon WLAN 7590« verbunden.",
+        "category": null,
+        "desktop_entry": "org.freedesktop.network-manager-applet",
+        "expiry_wall_ms": 1785437337216,
+        "icon": "nm-signal-75",
+        "id": 69,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1785437331216,
+        "summary": "Verbindung hergestellt",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
+    },
+    {
+      "active": false,
+      "close_reason": "expired",
+      "event_serial": 172,
+      "notification": {
+        "actions": [],
+        "app_name": "Nextcloud",
+        "body": "",
+        "category": null,
+        "desktop_entry": "com.nextcloud.desktopclient.nextcloud",
+        "expiry_wall_ms": 1785437989576,
+        "icon": "Nextcloud",
+        "id": 70,
+        "image_data": null,
+        "origin": "external",
+        "received_wall_ms": 1785437983576,
+        "summary": "Eine Aktualisierung für Team Folders auf Version 21.0.13 ist verfügbar.",
+        "timeout": 6000,
+        "urgency": "normal"
+      },
+      "seen": false
     }
   ],
-  "next_id": 65,
+  "next_id": 71,
   "version": 2
 }
