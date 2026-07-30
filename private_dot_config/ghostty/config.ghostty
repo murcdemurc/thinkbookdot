@@ -1,0 +1,9 @@
+theme = noctalia
+
+font-family = "JetBrainsMono"
+font-size = 8.5
+
+font-feature = "liga"
+font-feature = "calt"
+
+background-opacity = 0.6
