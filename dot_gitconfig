@@ -1,5 +1,3 @@
 [user]
-	email = l0lig@yahoo.de
 	name = murcdemurc
-[safe]
-	directory = /home/murc/.local/share/chezmoi
+	email = l0lig@yahoo.de
