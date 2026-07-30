@@ -14,4 +14,4 @@ sh -c "$(curl -fsLS get.chezmoi.io)"
 ```
 ## Dot-File Installation
 
-```chezmoi init --apply git@github.com:YOUR_USERNAME/thinkbookdot.git```
+```chezmoi init --apply git@github.com:murcdemurc/thinkbookdot.git```
