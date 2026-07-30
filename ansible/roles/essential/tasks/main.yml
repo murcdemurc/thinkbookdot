@@ -1,0 +1,59 @@
+---
+- name: Install essential packages
+  ansible.builtin.package:
+    name:
+      - git
+      - curl
+      - tree
+      - ranger
+      - zip
+      - base-devel
+
+      - pipewire
+      - wireplumber
+      - mesa
+      - radeon-vulkan
+      - power-profiles-daemon
+      - bluez
+
+      - mako
+      - fastfetch
+      - sddm
+      - niri
+      - noto-fonts
+      - ttf-jetbrains-mono-nerd
+      - ghostty
+      - dolphin
+      - nextcloud-client
+
+    state: present
+
+- name: Check if paru is installed
+  ansible.builtin.command:
+    cmd: which paru
+  register: paru_check
+  failed_when: false
+  changed_when: false
+  become: false
+
+- name: Clone paru repository
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/paru.git
+    dest: "{{ ansible_env.HOME }}/paru"
+  when: paru_check.rc != 0
+  become: false
+
+- name: Build and install paru
+  ansible.builtin.command:
+    cmd: makepkg -si --noconfirm
+    chdir: "{{ ansible_env.HOME }}/paru"
+  when: paru_check.rc != 0
+  become: false
+
+- name: Install AUR packages
+  become: false
+  kewlfft.aur.aur:
+    name:
+      - librewolf
+      - noctalia-git
+    state: present

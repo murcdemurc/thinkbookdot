@@ -1,0 +1,10 @@
+- name: Configure localhost
+  hosts: localhost
+  connection: local
+  become: true
+
+  roles:
+    - essential
+    ## - gaming
+    - productivity
+    - ltr

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> Checking for Ansible..."
+
+if ! command -v ansible-playbook >/dev/null 2>&1; then
+    echo "==> Installing Ansible..."
+    sudo pacman -Syu --needed ansible
+fi
+
+echo "==> Running Ansible..."
+
+
+ansible-playbook -i localhost, -c local ansible/site.yml
