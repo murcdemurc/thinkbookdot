@@ -1,0 +1,13 @@
+---
+- name: Install utility packages
+  ansible.builtin.package:
+    name:
+      - btop
+      - fastfetch
+      - fuzzel
+      - nextcloud-client
+      - noto-fonts
+      - ranger
+      - tree
+      - zip
+    state: present

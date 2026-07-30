@@ -4,9 +4,6 @@
     name:
       - git
       - curl
-      - tree
-      - ranger
-      - zip
       - base-devel
 
       - pipewire
@@ -16,16 +13,28 @@
       - bluez
 
       - mako
-      - fastfetch
       - sddm
       - niri
-      - noto-fonts
       - ttf-jetbrains-mono-nerd
       - ghostty
       - dolphin
-      - nextcloud-client
 
     state: present
+
+- name: Ensure /etc/sudoers.d exists
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    state: directory
+    mode: '0750'
+
+- name: Copy sudoers rule for paru
+  ansible.builtin.copy:
+    src: 10-murc-paru
+    dest: /etc/sudoers.d/10-murc-paru
+    mode: '0440'
+    owner: root
+    group: root
+    validate: /usr/sbin/visudo -cf %s
 
 - name: Check if paru is installed
   ansible.builtin.command:

@@ -1,0 +1,7 @@
+---
+- name: Install noctalia AUR packages
+  kewlfft.aur.aur:
+    name:
+      - noctalia-git
+    use: paru
+  become: false

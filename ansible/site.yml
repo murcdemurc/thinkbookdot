@@ -6,20 +6,32 @@
 
   vars:
     install_essential: true
-    install_aur: true
+    install_aur_leisure: true
+    install_aur_work: false
+    install_aur_noctalia: true
     install_gaming: false
+    install_utils: true
     install_productivity: true
     install_ltr: true
- 
+
   roles:
     - role: essential
       when: install_essential | bool
 
-    - role: aur
-      when: install_aur | bool
+    - role: aur_leisure
+      when: install_aur_leisure | bool
+
+    - role: aur_work
+      when: install_aur_work | bool
+
+    - role: aur_noctalia
+      when: install_aur_noctalia | bool
 
     - role: gaming
       when: install_gaming | bool
+
+    - role: utils
+      when: install_utils | bool
 
     - role: productivity
       when: install_productivity | bool
