@@ -12,6 +12,6 @@ Install chezmoi:
 ```bash
 sh -c "$(curl -fsLS get.chezmoi.io)"
 ```
-# Dot-File Installation
+## Dot-File Installation
 
 ```chezmoi init --apply git@github.com:YOUR_USERNAME/thinkbookdot.git```
