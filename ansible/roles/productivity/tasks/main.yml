@@ -1,19 +1,13 @@
 ---
-- name: Install official repo packages
+- name: Install essential pacman packages
   become: true
-  ansible.builtin.pacman:
+  ansible.builtin.package:
     name:
       - thunderbird
+      - reaper
       - waydroid
       - flatpak
     state: present
-
-- name: Install reaper (force overwrite due to manual install leftovers)
-  become: true
-  ansible.builtin.pacman:
-    name: reaper
-    state: present
-    extra_args: --overwrite '*'
 
 - name: Install Flatpak applications
   community.general.flatpak:
