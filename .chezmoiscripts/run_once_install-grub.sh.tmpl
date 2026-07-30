@@ -4,5 +4,7 @@ sudo cp "{{ .chezmoi.sourceDir }}/grub/grub" /etc/default/grub
 
 sudo mkdir -p /boot/grub/themes
 sudo cp -r "{{ .chezmoi.sourceDir }}/grub/themes/starfield" /boot/grub/themes/
+sudo cp -r "{{ .chezmoi.sourceDir }}/grub/themes/nord" /boot/grub/themes/
+
 
 sudo grub-mkconfig -o /boot/grub/grub.cfg
