@@ -4,6 +4,10 @@ Personal dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
 Contains my Linux configuration, shell setup, window manager, system configs, and provisioning.
 
+## !!IMPORTANT!!
+
+This setup is only for Arch/ Arch-based distos.
+
 ## What's included
 
 | Category | Tools / Configs |
