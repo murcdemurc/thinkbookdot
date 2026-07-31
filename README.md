@@ -24,8 +24,9 @@ This setup is only for Arch/ Arch-based distos.
 ```bash
 # Install chezmoi
 sudo pacman -S chezmoi
-
+```
 # Apply dotfiles
+```
 chezmoi init --apply https://github.com/murcdemurc/thinkbookdot.git
 ```
 
