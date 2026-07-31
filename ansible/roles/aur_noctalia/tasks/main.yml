@@ -5,7 +5,7 @@
   failed_when: noctalia_check.rc not in [0, 1]
 
 - name: Install noctalia-git AUR packages
-  ansible.builtin.shell: paru -S --needed --noconfirm --m-flags "--skippgpcheck" noctalia-git
+  ansible.builtin.shell: paru -S --needed --noconfirm --mflags "--skippgpcheck" noctalia-git
   become: false
   when: noctalia_check.rc != 0
 
@@ -16,6 +16,6 @@
   failed_when: noctalia_shell_check.rc not in [0, 1]
 
 - name: Install noctalia-shell AUR packages
-  ansible.builtin.shell: paru -S --needed --noconfirm --m-flags "--skippgpcheck" noctalia-shell
+  ansible.builtin.shell: paru -S --needed --noconfirm --mflags "--skippgpcheck" noctalia-shell
   become: false
   when: noctalia_shell_check.rc != 0
