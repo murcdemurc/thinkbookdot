@@ -105,13 +105,13 @@ wallpaper_scheme = "m3-content"
 directory = "/home/murc/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/murc/Pictures/Wallpapers/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
 
     [wallpaper.last]
-    path = "/home/murc/Pictures/Wallpapers/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/murc/Pictures/Wallpapers/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
 
     [[wallpaper.favorite]]
     community_palette = "Everforest"
