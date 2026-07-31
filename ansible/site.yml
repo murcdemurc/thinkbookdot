@@ -17,7 +17,7 @@
 
   roles:
 
-    - role:grub_theme
+    - role: grub_theme
       when: install_grub_theme | bool
 
     - role: sddm_theme
