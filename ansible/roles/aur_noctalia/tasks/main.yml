@@ -12,9 +12,9 @@
   become: false
   when: noctalia_check.rc != 0
 
-  - name: Check if noctalia-shell is installed
+- name: Check if noctalia-shell is installed
   ansible.builtin.command: pacman -Q noctalia-shell 
-  register: noctalia_check
+  register: noctalia_shell_check
   changed_when: false
   failed_when: noctalia_check.rc not in [0, 1]
 
