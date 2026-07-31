@@ -3,5 +3,6 @@
     name:
       - librewolf-bin
       - deezer
+      - spotify
     use: paru
   become: false
