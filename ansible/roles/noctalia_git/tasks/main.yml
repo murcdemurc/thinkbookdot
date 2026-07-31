@@ -19,5 +19,5 @@
 - name: Copy noctalia wallpaper
   become: false
   ansible.builtin.copy:
-    src: noctalia-wallpaper.png
+    src: nordic.jpeg
     dest: "{{ ansible_env.HOME }}/Pictures/Wallpapers/nordic.jpeg"
