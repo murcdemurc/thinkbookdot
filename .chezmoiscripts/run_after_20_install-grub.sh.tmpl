@@ -1,7 +1,0 @@
-#!/bin/bash
-
-sudo cp "{{ .chezmoi.sourceDir }}/grub/grub" /etc/default/grub
-
-sudo mkdir -p /usr/share/grub/themes
-sudo cp -r "{{ .chezmoi.sourceDir }}/grub/themes/nord" /usr/share/grub/themes/
-sudo grub-mkconfig -o /boot/grub/grub.cfg

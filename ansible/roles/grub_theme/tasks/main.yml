@@ -1,0 +1,15 @@
+- name: Install GRUB theme files
+  become: true
+  ansible.builtin.copy:
+    src: nord/
+    dest: /usr/share/grub/themes/nord/
+
+- name: Configure GRUB
+  become: true
+  ansible.builtin.copy:
+    src: grub
+    dest: /etc/default/grub
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Regenerate GRUB config

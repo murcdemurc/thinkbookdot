@@ -4,6 +4,7 @@
   gather_facts: true
 
   vars:
+    install_grub_theme: true
     install_sddm_theme: true
     install_essential: true
     install_aur_leisure: true
@@ -15,6 +16,9 @@
     install_ltr: true
 
   roles:
+
+    - role:grub_theme
+      when: install_grub_theme | bool
 
     - role: sddm_theme
       when: install_sddm_theme | bool
