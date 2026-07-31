@@ -29,6 +29,8 @@
     cmd: fc-cache -f
   changed_when: false
 
+sudo mkdir -p /etc/sddm.conf.d/
+
 - name: Configure SDDM theme
   become: true
   ansible.builtin.copy:
