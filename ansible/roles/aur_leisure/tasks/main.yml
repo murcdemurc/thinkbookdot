@@ -1,4 +1,3 @@
----
 - name: Install leisure AUR packages
   kewlfft.aur.aur:
     name:
