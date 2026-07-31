@@ -1,3 +1,8 @@
+- name: Import noctalia PGP key
+  ansible.builtin.command: gpg --recv-keys <KEYID>
+  become: false
+  changed_when: false
+
 - name: Check if noctalia-git is installed
   ansible.builtin.command: pacman -Q noctalia-git 
   register: noctalia_check
@@ -9,7 +14,6 @@
     name:
       - noctalia-git
     use: paru
-    skip_pgp_check: true
   become: false
   when: noctalia_check.rc != 0
 
@@ -24,6 +28,5 @@
     name:
       - noctalia-shell
     use: paru
-    skip_pgp_check: true
   become: false
   when: noctalia_shell_check.rc != 0
