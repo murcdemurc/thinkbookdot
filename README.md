@@ -19,16 +19,10 @@ Contains my Linux configuration, shell setup, window manager, system configs, an
 
 ```bash
 # Install chezmoi
-sh -c "$(curl -fsLS get.chezmoi.io)"
+sudo pacman -S chezmoi
 
 # Apply dotfiles
-chezmoi init --apply git@github.com:murcdemurc/thinkbookdot.git
-```
-
-After the initial apply, run the Ansible playbook to install packages:
-
-```bash
-ansible-playbook ~/.local/share/chezmoi/ansible/site.yml
+chezmoi init --apply https://github.com/murcdemurc/thinkbookdot.git
 ```
 
 You'll be prompted for your sudo password where needed.
