@@ -9,6 +9,7 @@
 
       - pipewire
       - wireplumber
+      - pipewire-pulse
       - mesa
       - power-profiles-daemon
       - bluez
