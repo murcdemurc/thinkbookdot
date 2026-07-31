@@ -4,6 +4,7 @@
   gather_facts: true
 
   vars:
+    install_sddm_theme: true
     install_essential: true
     install_aur_leisure: true
     install_aur_work: false
@@ -14,6 +15,10 @@
     install_ltr: true
 
   roles:
+
+    - role: sddm_theme
+      when: install_sddm_theme | bool
+    
     - role: essential
       when: install_essential | bool
 

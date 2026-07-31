@@ -1,0 +1,45 @@
+- name: Install SDDM theme dependencies
+  become: true
+  ansible.builtin.package:
+    name:
+      - qt6-svg
+      - qt6-virtualkeyboard
+      - qt6-multimedia-ffmpeg
+      - qt6-imageformats
+    state: present
+
+- name: Copy Silent theme to SDDM themes directory
+  become: true
+  ansible.builtin.copy:
+    src: silent/
+    dest: /usr/share/sddm/themes/silent/
+
+- name: Copy Silent theme fonts
+  become: true
+  ansible.builtin.copy:
+    src: "silent/fonts/{{ item }}"
+    dest: /usr/share/fonts/
+  loop:
+    - redhat
+    - redhat-vf
+
+- name: Refresh font cache
+  become: true
+  ansible.builtin.command:
+    cmd: fc-cache -f
+  changed_when: false
+
+- name: Configure SDDM theme
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/sddm.conf.d/theme.conf
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      [Theme]
+      Current=silent
+
+      [General]
+      InputMethod=qtvirtualkeyboard
+      GreeterEnvironment=QML2_IMPORT_PATH=/usr/share/sddm/themes/silent/components/,QT_IM_MODULE=qtvirtualkeyboard
