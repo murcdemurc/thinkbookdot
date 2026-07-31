@@ -1,6 +1,6 @@
 # thinkbookdot
 
-Personal Thinkbook dotfiles managed with [chezmoi](https://www.chezmoi.io/), in a Everforest theme.
+Personal Thinkbook dotfiles managed with [chezmoi](https://www.chezmoi.io/), in style of the "Everforest" color-scheme.
 
 Contains my Linux configuration, shell setup, window manager, system configs, and provisioning.
 
