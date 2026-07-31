@@ -24,4 +24,4 @@
       - noctalia-shell
     use: paru
   become: false
-  when: noctalia_check.rc != 0
+  when: noctalia_shell_check.rc != 0
