@@ -9,6 +9,7 @@
   become: false
   when: noctalia_check.rc != 0
 
+
 - name: Check if noctalia-shell is installed
   ansible.builtin.command: pacman -Q noctalia-shell 
   register: noctalia_shell_check
@@ -19,3 +20,16 @@
   ansible.builtin.shell: paru -S --needed --noconfirm --overwrite "*" --mflags "--skippgpcheck" noctalia-shell
   become: false
   when: noctalia_shell_check.rc != 0
+
+
+- name: Create wallpapers directory
+  become: false
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/Pictures/Wallpapers"
+    state: directory
+
+- name: Copy noctalia wallpaper
+  become: false
+  ansible.builtin.copy:
+    src: noctalia-wallpaper.png
+    dest: "{{ ansible_env.HOME }}/Pictures/Wallpapers/nordic.jpeg"
