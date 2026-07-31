@@ -29,7 +29,11 @@
     cmd: fc-cache -f
   changed_when: false
 
-sudo mkdir -p /etc/sddm.conf.d/
+- name: Create SDDM config directory
+  become: true
+  ansible.builtin.file:
+    path: /etc/sddm.conf.d/
+    state: directory
 
 - name: Configure SDDM theme
   become: true
