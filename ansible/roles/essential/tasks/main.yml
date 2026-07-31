@@ -18,6 +18,7 @@
       - niri
       - ttf-jetbrains-mono-nerd
       - ghostty
+      - alacritty
       - dolphin
 
     state: present
