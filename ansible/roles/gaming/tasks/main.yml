@@ -1,4 +1,3 @@
----
 - name: Install gaming pacman packages
   ansible.builtin.package:
     name:
