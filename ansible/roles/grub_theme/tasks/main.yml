@@ -12,7 +12,6 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Regenerate GRUB config
 
 - name: Regenerate GRUB config
   become: true
