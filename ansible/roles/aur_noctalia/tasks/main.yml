@@ -1,6 +1,27 @@
-- name: Install noctalia AUR packages
+- name: Check if noctalia-git is installed
+  ansible.builtin.command: pacman -Q noctalia-git 
+  register: noctalia_check
+  changed_when: false
+  failed_when: noctalia_check.rc not in [0, 1]
+
+- name: Install noctalia-git AUR packages
   kewlfft.aur.aur:
     name:
       - noctalia-git
     use: paru
   become: false
+  when: noctalia_check.rc != 0
+
+  - name: Check if noctalia-shell is installed
+  ansible.builtin.command: pacman -Q noctalia-shell 
+  register: noctalia_check
+  changed_when: false
+  failed_when: noctalia_check.rc not in [0, 1]
+
+- name: Install noctalia-shell AUR packages
+  kewlfft.aur.aur:
+    name:
+      - noctalia-shell
+    use: paru
+  become: false
+  when: noctalia_check.rc != 0
