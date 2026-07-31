@@ -17,7 +17,7 @@
   ansible.builtin.command: pacman -Q noctalia-shell 
   register: noctalia_shell_check
   changed_when: false
-  failed_when: noctalia_check.rc not in [0, 1]
+  failed_when: noctalia_shell_check.rc not in [0, 1]
 
 - name: Install noctalia-shell AUR packages
   kewlfft.aur.aur:
