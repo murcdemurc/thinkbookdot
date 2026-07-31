@@ -1,8 +1,3 @@
-- name: Import noctalia PGP key
-  ansible.builtin.command: gpg --recv-keys <KEYID>
-  become: false
-  changed_when: false
-
 - name: Check if noctalia-git is installed
   ansible.builtin.command: pacman -Q noctalia-git 
   register: noctalia_check
@@ -10,10 +5,7 @@
   failed_when: noctalia_check.rc not in [0, 1]
 
 - name: Install noctalia-git AUR packages
-  kewlfft.aur.aur:
-    name:
-      - noctalia-git
-    use: paru
+  ansible.builtin.shell: paru -S --needed --noconfirm --skippgpcheck noctalia-git
   become: false
   when: noctalia_check.rc != 0
 
@@ -24,9 +16,6 @@
   failed_when: noctalia_shell_check.rc not in [0, 1]
 
 - name: Install noctalia-shell AUR packages
-  kewlfft.aur.aur:
-    name:
-      - noctalia-shell
-    use: paru
+  ansible.builtin.shell: paru -S --needed --noconfirm --skippgpcheck noctalia-shell
   become: false
   when: noctalia_shell_check.rc != 0
