@@ -9,6 +9,7 @@
     name:
       - noctalia-git
     use: paru
+    skip-pgp-check: true
   become: false
   when: noctalia_check.rc != 0
 
@@ -23,5 +24,6 @@
     name:
       - noctalia-shell
     use: paru
+    skip-pgp-check: true
   become: false
   when: noctalia_shell_check.rc != 0
