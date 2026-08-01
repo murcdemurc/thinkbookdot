@@ -13,6 +13,7 @@
     install_services: true
     install_aur_leisure: true
     install_aur_work: true
+    install_librewolf: true
     install_gaming: false
     install_productivity: true
     install_ltr: true
@@ -71,6 +72,17 @@
           ansible.builtin.debug:
             msg: "aur_work role failed, continuing with remaining roles"
       when: install_aur_work | bool
+
+    - name: librewolf
+      block:
+        - name: Run librewolf role
+          ansible.builtin.include_role:
+            name: librewolf
+      rescue:
+        - name: librewolf failed, continuing
+          ansible.builtin.debug:
+            msg: "librewolf role failed, continuing with remaining roles"
+      when: install_librewolf | bool
 
     - name: gaming
       ansible.builtin.include_role:

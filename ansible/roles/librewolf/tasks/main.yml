@@ -1,0 +1,12 @@
+- name: Install librewolf-bin from AUR
+  kewlfft.aur.aur:
+    name:
+      - librewolf-bin
+    use: paru
+  become: false
+
+- name: Ensure sqlite is installed (needed for bookmarks.html export)
+  become: true
+  ansible.builtin.package:
+    name: sqlite
+    state: present

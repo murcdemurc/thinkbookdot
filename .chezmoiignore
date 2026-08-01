@@ -6,5 +6,8 @@ dot_local/private_state/noctalia/plugins/sources/community/repo/dot_git/
 dot_local/private_state/noctalia/plugins/sources/community/repo/dot_git/**
 dot_local/private_state/noctalia/notification_history.json
 dot_local/private_state/noctalia/notification_history_assets/**
+# LibreWolf-Backups (Punkt-Ordner ist schon ignoriert, hier explizit für Klarheit)
+.librewolf-backup/
+.librewolf-backup/**
 README.md
 etc_sudoers.d/10-murc-paru

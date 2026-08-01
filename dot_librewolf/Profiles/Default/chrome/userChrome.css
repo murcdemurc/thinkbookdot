@@ -1,0 +1,16 @@
+/* Managed LibreWolf-Theme (userChrome.css).
+ * Wird aktiviert, sobald in user.js gesetzt ist:
+ *   toolkit.legacyUserProfileCustomizations.stylesheets -> true
+ *
+ * Anpassungen werden bei jedem Browser-Start von ~/.librewolf/Profiles/Default/chrome/
+ * geladen und im Backup unter .librewolf-backup/<profil>/chrome/ mitgesichert.
+ */
+
+/* Beispiel: Everforest-Akzentfarbe */
+/* :root { --lw-accent: #7fbbb3; } */
+
+/* Kompaktere Tab-Leiste */
+/* .tabbrowser-tab { min-height: 32px !important; } */
+
+/* Rounded Corners für Tabs */
+/* .tab-background { border-radius: 8px 8px 0 0 !important; } */

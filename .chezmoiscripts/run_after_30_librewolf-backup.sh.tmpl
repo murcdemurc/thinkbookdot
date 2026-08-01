@@ -1,0 +1,224 @@
+#!/usr/bin/env bash
+#
+# LibreWolf-Profil-Backup (git-freundlich).
+#
+# Sichert aus jedem Profil in ~/.librewolf die wiederherstellbaren Daten
+# als Text-Exporte nach ${SOURCE_DIR}/.librewolf-backup/<profil>/:
+#
+#   prefs.js          alle Einstellungen
+#   user.js           eigene managed Prefs (falls vorhanden)
+#   bookmarks.html    Lesezeichen (Export aus places.sqlite)
+#   extensions.json   installierte Erweiterungen
+#   containers.json   Multi-Account-Container
+#   search.json.mozlz4 Suchmaschinen (Original, komprimiert)
+#   chrome/           Themes / userChrome.css + userContent.css
+#   backup-info.txt   Zeitpunkt, Herkunft, LibreWolf-Version
+#
+# Bewusst NICHT gesichert (sensibel/binär/flüchtig):
+#   logins.json, key4.db, cert9.db  -> Passwörter & Zertifikate (Klartext im Repo!)
+#   cookies.sqlite, formhistory, storage/, cache*, sessionstore*, ...
+#
+# Der Ordner .librewolf-backup/ beginnt mit einem Punkt und wird von chezmoi
+# daher NICHT in das Home-Verzeichnis angewendet, aber im git-Repo versioniert.
+#
+# Der Export läuft auch, während der Browser geöffnet ist (places.sqlite wird
+# über sqlite3 .backup sicher kopiert). Nach dem Lauf einfach committen:
+#   chezmoi git add -A && chezmoi git push
+
+set -euo pipefail
+
+source_dir="{{ .chezmoi.sourceDir }}"
+home_dir="{{ .chezmoi.homeDir }}"
+lw_home="${home_dir}/.librewolf"
+backup_root="${source_dir}/.librewolf-backup"
+profiles_ini="${lw_home}/profiles.ini"
+
+if [[ ! -d "${lw_home}" ]]; then
+    echo "==> LibreWolf-Backup: kein Profil-Verzeichnis ${lw_home} vorhanden, überspringe."
+    exit 0
+fi
+
+lw_running=false
+if pgrep -x librewolf >/dev/null 2>&1; then
+    lw_running=true
+    echo "==> LibreWolf-Backup: Browser läuft - Exporte werden best-effort erstellt."
+fi
+
+# --- bookmarks.html aus places.sqlite exportieren -------------------------
+export_bookmarks() {
+    local profile_dir="$1" out_file="$2"
+    local places="${profile_dir}/places.sqlite"
+    local tmpdb=""
+
+    if [[ ! -f "${places}" ]]; then
+        echo "<!DOCTYPE NETSCAPE-Bookmark-file-1>" > "${out_file}"
+        echo "<!-- keine places.sqlite gefunden -->" >> "${out_file}"
+        return 0
+    fi
+
+    if command -v sqlite3 >/dev/null 2>&1; then
+        tmpdb="$(mktemp --suffix=.sqlite)"
+        if sqlite3 "${places}" ".backup '${tmpdb}'" 2>/dev/null; then
+            export_bookmarks_from_db "${tmpdb}" "${out_file}" || true
+        else
+            rm -f "${tmpdb}"
+            tmpdb=""
+            export_bookmarks_from_db "${places}" "${out_file}" || true
+        fi
+        [[ -n "${tmpdb}" ]] && rm -f "${tmpdb}"
+    else
+        echo "==> LibreWolf-Backup: sqlite3 fehlt, leere bookmarks.html erstellt."
+        echo "<!DOCTYPE NETSCAPE-Bookmark-file-1>" > "${out_file}"
+    fi
+}
+
+export_bookmarks_from_db() {
+    local db="$1" out_file="$2"
+
+    {
+        printf '<!DOCTYPE NETSCAPE-Bookmark-file-1>\n'
+        printf '<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">\n'
+        printf '<TITLE>Bookmarks</TITLE>\n<H1>Bookmarks</H1>\n<DL><p>\n'
+
+        local open=1 prev_line="" depth type title url add_date esc_title esc_url
+        local indent=""
+        while IFS=$'\t' read -r depth type title url add_date; do
+            [[ "${type}" == "1" && ( -z "${url}" || "${url}" == "__NO_URL__" ) ]] && continue
+            while (( open > depth + 1 )); do
+                printf '  </DL><p>\n'
+                open=$((open - 1))
+            done
+
+            [[ "${url}" == "__NO_URL__" ]] && url=""
+            indent=""
+            for (( i = 0; i < depth; i++ )); do indent+="  "; done
+
+            esc_title="$(printf '%s' "${title}" | sed -e 's/&/\&amp;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g')"
+            esc_url="$(printf '%s' "${url}" | sed -e 's/&/\&amp;/g' -e 's/"/\&quot;/g' -e 's/</\&lt;/g' -e 's/>/\&gt;/g')"
+
+            case "${type}" in
+                2)
+                    printf '%s<DT><H3 ADD_DATE="%s">%s</H3>\n' "${indent}" "${add_date}" "${esc_title}"
+                    printf '%s<DL><p>\n' "${indent}"
+                    open=$((open + 1))
+                    ;;
+                3)
+                    printf '%s<HR>\n' "${indent}"
+                    ;;
+                *)
+                    printf '%s<DT><A HREF="%s" ADD_DATE="%s">%s</A>\n' "${indent}" "${esc_url}" "${add_date}" "${esc_title}"
+                    ;;
+            esac
+        done < <(sqlite3 -noheader -separator $'\t' "${db}" "
+            WITH RECURSIVE tree(id, parent, type, title, url, date_added, position, depth, path) AS (
+                SELECT b.id, b.parent, b.type,
+                       REPLACE(REPLACE(REPLACE(COALESCE(b.title, ''), char(10), ' '), char(13), ' '), char(9), ' '),
+                       CASE WHEN COALESCE(p.url, '') = '' THEN '__NO_URL__' ELSE p.url END,
+                       CAST(b.dateAdded / 1000000 AS INTEGER),
+                       b.position,
+                       0,
+                       printf('%04d', b.position)
+                FROM moz_bookmarks b
+                LEFT JOIN moz_places p ON p.id = b.fk
+                WHERE b.parent = (SELECT id FROM moz_bookmarks WHERE type = 2 AND parent = 0 LIMIT 1)
+                UNION ALL
+                SELECT b.id, b.parent, b.type,
+                       REPLACE(REPLACE(REPLACE(COALESCE(b.title, ''), char(10), ' '), char(13), ' '), char(9), ' '),
+                       CASE WHEN COALESCE(p.url, '') = '' THEN '__NO_URL__' ELSE p.url END,
+                       CAST(b.dateAdded / 1000000 AS INTEGER),
+                       b.position,
+                       t.depth + 1,
+                       t.path || '/' || printf('%04d', b.position)
+                FROM moz_bookmarks b
+                JOIN tree t ON t.id = b.parent
+                LEFT JOIN moz_places p ON p.id = b.fk
+            )
+            SELECT t.depth, t.type, t.title, t.url, t.date_added
+            FROM tree t
+            ORDER BY t.path, t.position;
+        ")
+
+        while (( open > 0 )); do
+            printf '</DL><p>\n'
+            open=$((open - 1))
+        done
+    } > "${out_file}"
+}
+
+# --- ein einzelnes Profil sichern -----------------------------------------
+backup_profile() {
+    local name="$1" profile_dir="$2"
+    local dest="${backup_root}/${name}"
+    mkdir -p "${dest}/chrome"
+
+    echo "==> LibreWolf-Backup: ${name} (${profile_dir})"
+
+    cp -f "${profile_dir}/prefs.js" "${dest}/prefs.js" 2>/dev/null || true
+    if [[ -f "${profile_dir}/user.js" ]]; then
+        cp -f "${profile_dir}/user.js" "${dest}/user.js"
+    fi
+    cp -f "${profile_dir}/extensions.json" "${dest}/extensions.json" 2>/dev/null || true
+    cp -f "${profile_dir}/containers.json" "${dest}/containers.json" 2>/dev/null || true
+    cp -f "${profile_dir}/search.json.mozlz4" "${dest}/search.json.mozlz4" 2>/dev/null || true
+
+    if [[ -d "${profile_dir}/chrome" ]]; then
+        rsync -a --delete "${profile_dir}/chrome/" "${dest}/chrome/"
+    fi
+
+    export_bookmarks "${profile_dir}" "${dest}/bookmarks.html"
+
+    {
+        echo "backup_time:      $(date -Is)"
+        echo "profile_dir:      ${profile_dir}"
+        echo "librewolf_running: ${lw_running}"
+        echo "librewolf_version: $(librewolf --version 2>/dev/null | head -1 || echo 'n/a')"
+        echo "excluded:         logins.json, key4.db, cert9.db, cookies, storage, caches, sessionstate"
+    } > "${dest}/backup-info.txt"
+}
+
+# --- Profile entdecken -----------------------------------------------------
+declare -a found_profiles=()
+
+if [[ -f "${profiles_ini}" ]]; then
+    while IFS=$'\t' read -r pname ppath is_rel; do
+        [[ -z "${ppath}" ]] && continue
+        if [[ "${is_rel}" == "1" ]]; then
+            pdir="${lw_home}/${ppath}"
+        else
+            pdir="${ppath}"
+        fi
+        if [[ -d "${pdir}" ]]; then
+            found_profiles+=("${pname}"$'\t'"${pdir}")
+        fi
+    done < <(awk -F= '
+        /^\[Profile[0-9]+\]/ { if (name != "") print name "\t" path "\t" is_rel; name = ""; path = ""; is_rel = "1" }
+        /^Name=/     { name = $2 }
+        /^Path=/     { path = $2 }
+        /^IsRelative=/ { is_rel = $2 }
+        END { if (name != "") print name "\t" path "\t" is_rel }
+    ' "${profiles_ini}" | sed 's/\r$//')
+fi
+
+if [[ ${#found_profiles[@]} -eq 0 ]]; then
+    # Fallback: alle Ordner unter ~/.librewolf mit prefs.js als Profil behandeln
+    while IFS= read -r -d '' prefs_file; do
+        pdir="$(dirname "${prefs_file}")"
+        found_profiles+=("$(basename "${pdir}")"$'\t'"${pdir}")
+    done < <(find "${lw_home}" -maxdepth 4 -name prefs.js -print0 2>/dev/null)
+fi
+
+if [[ ${#found_profiles[@]} -eq 0 ]]; then
+    echo "==> LibreWolf-Backup: kein Profil gefunden, überspringe."
+    exit 0
+fi
+
+mkdir -p "${backup_root}"
+for entry in "${found_profiles[@]}"; do
+    IFS=$'\t' read -r pname pdir <<< "${entry}"
+    backup_profile "${pname}" "${pdir}"
+done
+
+echo
+echo "==> LibreWolf-Backup abgeschlossen nach ${backup_root}"
+echo "    Committen mit:  chezmoi git add -A && chezmoi git push"
+echo "    Alternativ nur das LibreWolf-Backup ansehen: git diff .librewolf-backup/"
