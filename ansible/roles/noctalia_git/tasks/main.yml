@@ -1,14 +1,9 @@
-- name: Check if noctalia-git is installed
-  ansible.builtin.command: pacman -Q noctalia-git 
-  register: noctalia_check
-  changed_when: false
-  failed_when: noctalia_check.rc not in [0, 1]
-
-- name: Install noctalia-git AUR packages
-  ansible.builtin.shell: paru -S --needed --noconfirm --overwrite "*" --mflags "--skippgpcheck" noctalia-git
+---
+- name: Install noctalia-git AUR package
+  kewlfft.aur.aur:
+    name: noctalia-git
+    use: paru
   become: false
-  when: noctalia_check.rc != 0
-
 
 - name: Create wallpapers directory
   become: false
