@@ -4,107 +4,36 @@
   gather_facts: true
 
   vars:
-    install_grub_theme: true
-    install_sddm_theme: true
     install_essential: true
-    install_utils: true
-    install_noctalia_git: true
-    install_noctalia_shell: false
-    install_services: true
     install_aur_leisure: true
-    install_aur_work: true
-    install_librewolf: true
+    install_aur_work: false
+    install_aur_noctalia: true
     install_gaming: false
+    install_utils: true
     install_productivity: true
     install_ltr: true
 
-  tasks:
-
-    - name: grub_theme
-      ansible.builtin.include_role:
-        name: grub_theme
-      when: install_grub_theme | bool
-
-    - name: sddm_theme
-      ansible.builtin.include_role:
-        name: sddm_theme
-      when: install_sddm_theme | bool
-
-    - name: essential
-      ansible.builtin.include_role:
-        name: essential
+  roles:
+    - role: essential
       when: install_essential | bool
 
-    - name: noctalia_git
-      ansible.builtin.include_role:
-        name: noctalia_git
-      when: install_noctalia_git | bool
-
-    - name: noctalia_shell
-      block:
-        - name: Run noctalia_shell role
-          ansible.builtin.include_role:
-            name: noctalia_shell
-      rescue:
-        - name: noctalia_shell failed, continuing
-          ansible.builtin.debug:
-            msg: "noctalia_shell role failed, continuing with remaining roles"
-      when: install_noctalia_shell | bool
-
-    - name: aur_leisure
-      block:
-        - name: Run aur_leisure role
-          ansible.builtin.include_role:
-            name: aur_leisure
-      rescue:
-        - name: aur_leisure failed, continuing
-          ansible.builtin.debug:
-            msg: "aur_leisure role failed, continuing with remaining roles"
+    - role: aur_leisure
       when: install_aur_leisure | bool
 
-    - name: aur_work
-      block:
-        - name: Run aur_work role
-          ansible.builtin.include_role:
-            name: aur_work
-      rescue:
-        - name: aur_work failed, continuing
-          ansible.builtin.debug:
-            msg: "aur_work role failed, continuing with remaining roles"
+    - role: aur_work
       when: install_aur_work | bool
 
-    - name: librewolf
-      block:
-        - name: Run librewolf role
-          ansible.builtin.include_role:
-            name: librewolf
-      rescue:
-        - name: librewolf failed, continuing
-          ansible.builtin.debug:
-            msg: "librewolf role failed, continuing with remaining roles"
-      when: install_librewolf | bool
+    - role: aur_noctalia
+      when: install_aur_noctalia | bool
 
-    - name: gaming
-      ansible.builtin.include_role:
-        name: gaming
+    - role: gaming
       when: install_gaming | bool
 
-    - name: utils
-      ansible.builtin.include_role:
-        name: utils
+    - role: utils
       when: install_utils | bool
 
-    - name: productivity
-      ansible.builtin.include_role:
-        name: productivity
+    - role: productivity
       when: install_productivity | bool
 
-    - name: ltr
-      ansible.builtin.include_role:
-        name: ltr
+    - role: ltr
       when: install_ltr | bool
-
-    - name: services
-      ansible.builtin.include_role:
-        name: services
-      when: install_services | bool

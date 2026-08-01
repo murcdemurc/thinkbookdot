@@ -1,3 +1,4 @@
+---
 - name: Install work AUR packages
   kewlfft.aur.aur:
     name:

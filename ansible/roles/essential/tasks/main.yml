@@ -1,3 +1,4 @@
+---
 - name: Install essential packages
   become: true
   ansible.builtin.package:
@@ -8,7 +9,6 @@
 
       - pipewire
       - wireplumber
-      - pipewire-pulse
       - mesa
       - power-profiles-daemon
       - bluez
@@ -18,7 +18,6 @@
       - niri
       - ttf-jetbrains-mono-nerd
       - ghostty
-      - alacritty
       - dolphin
 
     state: present
@@ -33,18 +32,12 @@
 - name: Copy sudoers rule for paru
   become: true
   ansible.builtin.copy:
-    content: "{{ ansible_env.USER }} ALL=(ALL) NOPASSWD: /usr/bin/pacman, /usr/bin/paru\n"
+    src: 10-murc-paru
     dest: /etc/sudoers.d/10-murc-paru
     mode: '0440'
     owner: root
     group: root
     validate: /usr/sbin/visudo -cf %s
-
-- name: Remove old sudoers file from chezmoi source
-  become: false
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.local/share/chezmoi/etc_sudoers.d/10-murc-paru"
-    state: absent
 
 - name: Check if paru is installed
   ansible.builtin.command:
