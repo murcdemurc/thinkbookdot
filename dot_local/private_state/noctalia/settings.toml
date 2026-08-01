@@ -102,21 +102,21 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "spicetify", "fuzzel" ]
 
 [wallpaper]
-directory = "/home/murc/Downloads"
+directory = "/home/murc/Pictures/Wallpaper"
 
     [wallpaper.default]
-    path = "/home/murc/Downloads/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpaper/nordic.jpeg"
 
     [wallpaper.last]
-    path = "/home/murc/Downloads/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpaper/nordic.jpeg"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/murc/Downloads/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpaper/nordic.jpeg"
 
     [[wallpaper.favorite]]
     community_palette = "Everforest"
     palette_source = "community"
-    path = "/home/murc/Downloads/nordic.jpg"
+    path = "/home/murc/Pictures/Wallpaper/nordic.jpeg"
     theme_mode = "auto"
 
 [widget.clock]
