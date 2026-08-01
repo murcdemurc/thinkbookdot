@@ -1,29 +1,4 @@
 #!/usr/bin/env bash
-#
-# LibreWolf-Profil-Backup (git-freundlich).
-#
-# Sichert aus jedem Profil in ~/.librewolf die wiederherstellbaren Daten
-# als Text-Exporte nach ${SOURCE_DIR}/.librewolf-backup/<profil>/:
-#
-#   prefs.js          alle Einstellungen
-#   user.js           eigene managed Prefs (falls vorhanden)
-#   bookmarks.html    Lesezeichen (Export aus places.sqlite)
-#   extensions.json   installierte Erweiterungen
-#   containers.json   Multi-Account-Container
-#   search.json.mozlz4 Suchmaschinen (Original, komprimiert)
-#   chrome/           Themes / userChrome.css + userContent.css
-#   backup-info.txt   Zeitpunkt, Herkunft, LibreWolf-Version
-#
-# Bewusst NICHT gesichert (sensibel/binär/flüchtig):
-#   logins.json, key4.db, cert9.db  -> Passwörter & Zertifikate (Klartext im Repo!)
-#   cookies.sqlite, formhistory, storage/, cache*, sessionstore*, ...
-#
-# Der Ordner .librewolf-backup/ beginnt mit einem Punkt und wird von chezmoi
-# daher NICHT in das Home-Verzeichnis angewendet, aber im git-Repo versioniert.
-#
-# Der Export läuft auch, während der Browser geöffnet ist (places.sqlite wird
-# über sqlite3 .backup sicher kopiert). Nach dem Lauf einfach committen:
-#   chezmoi git add -A && chezmoi git push
 
 set -euo pipefail
 
