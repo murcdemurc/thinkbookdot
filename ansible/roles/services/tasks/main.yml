@@ -15,8 +15,7 @@
   ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
-    state: started
-    scope: user
+        scope: user
     daemon_reload: true
   loop:
     - pipewire
