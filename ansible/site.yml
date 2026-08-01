@@ -10,13 +10,13 @@
     install_utils: true
     install_noctalia_git: true
     install_noctalia_shell: false
-    install_services: true
     install_aur_leisure: true
     install_aur_work: true
     install_librewolf: true
     install_gaming: false
     install_productivity: true
     install_ltr: true
+    install_services: true
 
   tasks:
 

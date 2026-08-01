@@ -1,15 +1,3 @@
-- name: Enable system services
-  become: true
-  ansible.builtin.systemd:
-    name: "{{ item }}"
-    enabled: true
-    state: started
-    daemon_reload: true
-  loop:
-    - sddm
-    - NetworkManager
-    - bluetooth
-
 - name: Enable user services (pipewire)
   become: false
   ansible.builtin.systemd:
@@ -21,3 +9,15 @@
     - pipewire
     - wireplumber
     - pipewire-pulse
+
+- name: Enable system services
+  become: true
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+    daemon_reload: true
+  loop:
+    - sddm
+    - NetworkManager
+    - bluetooth
