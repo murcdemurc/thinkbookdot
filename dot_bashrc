@@ -19,3 +19,5 @@ PS1='[\u@\h \W]\$ '
 
 export PATH=$PATH:/home/murc/.spicetify
 export PATH=$PATH:~/.spicetify
+
+export PATH="$HOME/.local/bin:$PATH"
