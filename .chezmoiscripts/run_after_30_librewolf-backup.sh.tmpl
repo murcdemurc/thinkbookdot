@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# LibreWolf-Backup bei jedem `chezmoi apply` anbieten.
+#
+# Läuft immer nach dem Apply (run_after) und fragt interaktiv,
+# ob das LibreWolf-Backup jetzt erstellt werden soll.
+# Nicht-interaktiv (z.B. per Ansible/Bootstrap) wird übersprungen.
+
+set -euo pipefail
+
+backup_script="{{ .chezmoi.homeDir }}/.local/bin/librewolf-backup.sh"
+backup_root="{{ .chezmoi.sourceDir }}/.librewolf-backup"
+
+if [[ ! -t 0 ]]; then
+    echo "==> LibreWolf-Backup: nicht-interaktiv, überspringe."
+    exit 0
+fi
+
+echo
+read -r -p "==> LibreWolf-Backup jetzt durchführen? [j/N] " answer
+case "${answer,,}" in
+    j|ja|y|yes)
+        ;;
+    *)
+        echo "==> LibreWolf-Backup übersprungen."
+        exit 0
+        ;;
+esac
+
+if [[ ! -x "${backup_script}" ]]; then
+    echo "==> LibreWolf-Backup: Skript ${backup_script} nicht gefunden, überspringe."
+    exit 0
+fi
+
+"${backup_script}"
+
+echo
+echo "==> LibreWolf-Backup gespeichert unter ${backup_root}"
+echo "    Committen mit:  chezmoi git add -A && chezmoi git commit -m 'update librewolf backup' && chezmoi git push"
