@@ -11,4 +11,13 @@
       - ranger
       - tree
       - zip
+
+      - opencode
+      - partitionmanager
+      - pavucontrol
+      - reflector
+      - smartmontools
+      - vim
+      - wget
+      - zram-generator
     state: present
