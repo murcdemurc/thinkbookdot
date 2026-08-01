@@ -28,3 +28,24 @@
   ansible.builtin.command:
     cmd: fc-cache -f
   changed_when: false
+
+- name: Create SDDM config directory
+  become: true
+  ansible.builtin.file:
+    path: /etc/sddm.conf.d/
+    state: directory
+
+- name: Configure SDDM theme
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/sddm.conf.d/theme.conf
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      [Theme]
+      Current=silent
+
+      [General]
+      InputMethod=qtvirtualkeyboard
+      GreeterEnvironment=QML2_IMPORT_PATH=/usr/share/sddm/themes/silent/components/,QT_IM_MODULE=qtvirtualkeyboard
