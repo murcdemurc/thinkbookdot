@@ -34,14 +34,8 @@
       when: install_essential | bool
 
     - name: noctalia_git
-      block:
-        - name: Run noctalia_git role
-          ansible.builtin.include_role:
-            name: noctalia_git
-      rescue:
-        - name: noctalia_git failed, continuing
-          ansible.builtin.debug:
-            msg: "noctalia_git role failed, continuing with remaining roles"
+      ansible.builtin.include_role:
+        name: noctalia_git
       when: install_noctalia_git | bool
 
     - name: noctalia_shell
