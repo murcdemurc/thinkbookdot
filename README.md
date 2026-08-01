@@ -22,8 +22,8 @@ This setup is only for Arch / Arch-based distros.
 ## Setup
 
 ```bash
-# Install chezmoi
-sudo pacman -S chezmoi
+# Install chezmoi and git (git is required for chezmoi init)
+sudo pacman -S chezmoi git
 ```
 
 ```bash
@@ -59,7 +59,7 @@ All provisioning is idempotent and controlled via feature flags in `ansible/site
 ~/.local/share/chezmoi/
 |-- ansible/                       # Ansible provisioning
 |   |-- site.yml                   # playbook with feature toggles
-|   |-- ansible.cfg                # ask_become_pass, local inventory
+|   |-- ansible.cfg                # local inventory, fact caching
 |   |-- requirements.yml           # Ansible collections
 |   `-- roles/
 |       |-- essential/             # base packages, services, paru bootstrap, sudoers
@@ -83,6 +83,6 @@ All provisioning is idempotent and controlled via feature flags in `ansible/site
 
 ## Notes
 
-- The Ansible playbook requires `ask_become_pass` (configured in `ansible.cfg`).
+- The Ansible playbook requires `--ask-become-pass` (passed by the bootstrap script).
 - Some files are marked `private_` (age-encrypted secrets).
 - `.chezmoiignore` excludes runtime state files (e.g. Noctalia git plugins, notification history).
