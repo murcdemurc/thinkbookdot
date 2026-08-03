@@ -43,45 +43,6 @@ chezmoi diff           # see pending changes
 chezmoi apply --force-run-scripts   # nur Backup erneut ausführen
 ```
 
-## LibreWolf backup
-
-`run_after_30_librewolf-backup.sh.tmpl` exportiert bei jedem `chezmoi apply`
-(bzw. `chezmoi update`) die wiederherstellbaren Daten **aller** Profile aus
-`~/.librewolf/` als Text nach `.librewolf-backup/<profil>/`:
-
-| Datei | Inhalt |
-|---|---|
-| `prefs.js` | alle Browser-Einstellungen |
-| `user.js` | eigene managed Prefs |
-| `bookmarks.html` | Lesezeichen (sqlite3-Export aus `places.sqlite`) |
-| `extensions.json` | installierte Erweiterungen |
-| `containers.json` | Multi-Account-Container |
-| `search.json.mozlz4` | Suchmaschinen |
-| `chrome/` | Themes / `userChrome.css` |
-| `backup-info.txt` | Zeitpunkt, Version, Hinweise |
-
-Danach committen: `chezmoi git add -A && chezmoi git push`.
-
-**Bewusst ausgenommen** (sensitive / binär / flüchtig): `logins.json`,
-`key4.db`, `cert9.db`, Cookies, `storage/`, Caches, Session-State. Willst du
-Passwörter & Zertifikate mit sichern, muss erst age-Verschlüsselung in chezmoi
-eingerichtet werden.
-
-Der Ordner `.librewolf-backup/` beginnt mit einem Punkt und wird von chezmoi
-**nicht** ins Home-Verzeichnis angewendet – er wird nur im git-Repo versioniert
-(siehe `.chezmoiignore`).
-
-Managed Einstellungen & Theme liegen dagegen in `dot_librewolf/` und werden bei
-jedem Setup automatisch wiederhergestellt:
-
-- `dot_librewolf/profiles.ini` → deterministisches Profil `Profiles/Default`
-- `dot_librewolf/Profiles/Default/user.js` → Einstellungen (about:config-Prefs)
-- `dot_librewolf/Profiles/Default/chrome/userChrome.css` → Theme
-
-> Hinweis: Das deterministische Profil wird über `profiles.ini` definiert.
-> Existiert auf einem Rechner bereits ein LibreWolf-Profil mit eigenem Namen,
-> wird ein zweites Profil angelegt statt das bestehende zu übernehmen.
-
 ## How it works
 
 `chezmoi init --apply` copies all dotfiles into place and then runs
