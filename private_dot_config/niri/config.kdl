@@ -637,3 +637,7 @@ environment {
   QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
+// Make the backdrop light.
+overview {
+    backdrop-color "#3C4841"
+}
