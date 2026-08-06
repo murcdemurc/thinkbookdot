@@ -1,4 +1,4 @@
-backup_time:      2026-08-01T22:46:01+02:00
+backup_time:      2026-08-06T16:40:08+02:00
 profile_dir:      /home/murc/.librewolf/mdmbi9z2.default-default
 librewolf_running: false
 librewolf_version: Mozilla LibreWolf 153.0-3
