@@ -365,7 +365,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+RETURN hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Open Noctalia Launcher" { spawn-sh "noctalia msg panel-toggle launcher"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock" "-i" "/home/murc/Bilder/cp2.png"; }
     Super+B hotkey-overlay-title="Run Browser: Librewolf" { spawn "librewolf"; }
     Super+Alt+B hotkey-overlay-title="Run Browser: Chromium" { spawn "chromium"; }
@@ -374,7 +374,7 @@ binds {
     Super+Alt+M hotkey-overlay-title="Run Musescore" { spawn "flatpak" "run" "org.musescore.MuseScore"; }
     Super+Alt+X hotkey-overlay-title="Run X-Air Edit" { spawn "flatpak" "run" "com.behringer.XAirEdit"; }
     Super+Alt+A hotkey-overlay-title="Run Affinity Canva" { spawn "gtk-launch" "Affinity"; }
-
+    Super+L     hotkey-overlay-title="Lock Screen" { spawn "noctalia" "msg" "session" "lock"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -609,7 +609,7 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
+    Print { spawn "grim" "$HOME/Pictures/screenshot.png"; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
@@ -630,6 +630,9 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+
+
+
 }
 include "./noctalia.kdl"
 
