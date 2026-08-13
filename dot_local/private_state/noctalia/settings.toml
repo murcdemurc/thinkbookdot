@@ -41,6 +41,10 @@ widget_order = []
 [location]
 auto_locate = true
 
+[lockscreen]
+blur_intensity = 0.24999999441206455
+fingerprint = false
+
 [lockscreen_widgets]
 enabled = false
 schema_version = 2
@@ -81,6 +85,7 @@ corner_radius_scale = 0.80000001192092896
 font_family = "JetBrainsMono NF"
 lang = "en"
 password_style = "random"
+polkit_agent = true
 
     [shell.animation]
     speed = 1.9500000290572643
