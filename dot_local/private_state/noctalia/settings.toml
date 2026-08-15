@@ -11,7 +11,7 @@ tint_intensity = 0.04999999888241291
 background_opacity = 0.79999998211860657
 center = [ "workspaces" ]
 concave_edge_corners = false
-end = [ "media", "tray", "network", "bluetooth", "volume", "brightness", "battery", "control-center", "session" ]
+end = [ "media", "tray", "network", "bluetooth", "widget", "brightness", "battery", "control-center", "session" ]
 font_weight = 400
 margin_ends = 0
 position = "left"
@@ -79,6 +79,9 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
 enabled = true
 temperature_day = 7500
 temperature_night = 4500
+
+[plugins]
+enabled = [ "blackbartblues/audio-switcher" ]
 
 [shell]
 corner_radius_scale = 0.80000001192092896
@@ -150,3 +153,6 @@ match_adjacent_spacing = true
 
 [widget.wallpaper]
 enabled = false
+
+[widget.widget]
+type = "blackbartblues/audio-switcher:widget"
