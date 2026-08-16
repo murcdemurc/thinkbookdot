@@ -329,8 +329,8 @@ binds {
     // but you need to manually put each argument in separate "" quotes.
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-    Mod+Shift+K { spawn "brightnessctl" "-d" "platform::kbd_backlight" "set" "100%"; }
-    Mod+Alt+K { spawn "brightnessctl" "-d" "platform::kbd_backlight" "set" "0%"; }
+    Mod+Shift+K allow-when-locked=true { spawn "brightnessctl" "-d" "platform::kbd_backlight" "set" "100%"; }
+    Mod+Alt+K allow-when-locked=true { spawn "brightnessctl" "-d" "platform::kbd_backlight" "set" "0%"; }
 
 
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
@@ -558,7 +558,7 @@ binds {
 include "./noctalia.kdl"
 
 environment {
-  QT_QPA_PLATFORMTHEME "kvantum"
+  QT_QPA_PLATFORMTHEME "qt6ct"
 }
 
 cursor {
