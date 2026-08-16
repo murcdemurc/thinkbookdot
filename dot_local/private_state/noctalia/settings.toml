@@ -18,7 +18,7 @@ position = "left"
 radius = 0
 radius_bottom_left = 0
 radius_top_left = 0
-start = [ "clock", "launcher" ]
+start = [ "wallpaper", "clock" ]
 thickness = 28
 
 [battery]
@@ -112,22 +112,34 @@ wallpaper_scheme = "m3-content"
     community_ids = [ "spicetify", "fuzzel" ]
 
 [wallpaper]
-directory = "/home/murc/Pictures/Wallpaper"
+directory = "/home/murc/Pictures/Wallpapers"
 
     [wallpaper.default]
-    path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
+    path = "/home/murc/Pictures/Wallpapers/mountain-village.png"
 
     [wallpaper.last]
-    path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
+    path = "/home/murc/Pictures/Wallpapers/mountain-village.png"
 
     [wallpaper.monitors.eDP-1]
-    path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
+    path = "/home/murc/Pictures/Wallpapers/mountain-village.png"
 
     [[wallpaper.favorite]]
     community_palette = "Everforest"
     palette_source = "community"
     path = "/home/murc/Pictures/Wallpapers/nordic.jpeg"
     theme_mode = "auto"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/murc/Pictures/Wallpapers/road-3.jpg"
+    theme_mode = "dark"
+
+    [[wallpaper.favorite]]
+    community_palette = "Everforest"
+    palette_source = "community"
+    path = "/home/murc/Pictures/Wallpapers/mountain-village.png"
+    theme_mode = "dark"
 
 [widget.clock]
 scale = 1.1500000000000001
@@ -150,9 +162,6 @@ scale = 1.25
 
 [widget.tray]
 match_adjacent_spacing = true
-
-[widget.wallpaper]
-enabled = false
 
 [widget.widget]
 type = "blackbartblues/audio-switcher:widget"
