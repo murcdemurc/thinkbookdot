@@ -29,14 +29,98 @@ sidebar = "full"
 
 [desktop_widgets]
 schema_version = 2
-widget_order = []
+widget_order = [
+    "desktop-widget-0000000000000001",
+    "desktop-widget-0000000000000002",
+    "desktop-widget-0000000000000003",
+    "desktop-widget-0000000000000004",
+    "desktop-widget-0000000000000005"
+]
 
     [desktop_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
 
-    [desktop_widgets.widget]
+    [desktop_widgets.widget.desktop-widget-0000000000000001]
+    box_height = 64.0
+    box_width = 352.0
+    cx = 240.0
+    cy = 60.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "weather"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000001.settings]
+        background = true
+        background_opacity = 0.40000000000000002
+        background_radius = 0
+        color = "secondary"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000002]
+    box_height = 128.0
+    box_width = 352.0
+    cx = 240.0
+    cy = 172.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "clock"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
+        background = true
+        background_opacity = 0.40000000000000002
+        background_radius = 0
+        center_text = false
+        clock_style = "digital"
+        color = "secondary"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000003]
+    box_height = 128.0
+    box_width = 352.0
+    cx = 240.0
+    cy = 444.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "media_player"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
+        background_opacity = 0.40000000000000002
+        background_radius = 0
+        color = "secondary"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000004]
+    box_height = 112.0
+    box_width = 176.0
+    cx = 152.0
+    cy = 308.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
+        background_opacity = 0.40000000000000002
+        background_radius = 0
+        display = "graph"
+        gauge_layout = "horizontal"
+        stat = "cpu_usage"
+        stat2 = "cpu_temp"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000005]
+    box_height = 112.0
+    box_width = 176.0
+    cx = 328.0
+    cy = 308.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "sysmon"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
+        background_opacity = 0.40000000000000002
+        background_radius = 0
+        display = "graph"
+        gauge_layout = "vertical"
+        stat = "swap_pct"
+        stat2 = "ram_pct"
 
 [location]
 auto_locate = true
@@ -82,6 +166,16 @@ temperature_night = 4500
 
 [plugins]
 enabled = [ "blackbartblues/audio-switcher" ]
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/official-plugins"
+    name = "official"
+
+    [[plugins.source]]
+    kind = "git"
+    location = "https://github.com/noctalia-dev/community-plugins"
+    name = "community"
 
 [shell]
 corner_radius_scale = 0.80000001192092896
