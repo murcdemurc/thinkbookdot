@@ -300,8 +300,10 @@ binds {
     Super+Alt+N hotkey-overlay-title="Run Nextcloud Client" { spawn "nextcloud"; }
     Super+Alt+M hotkey-overlay-title="Run Musescore" { spawn "flatpak" "run" "org.musescore.MuseScore"; }
     Super+Alt+X hotkey-overlay-title="Run X-Air Edit" { spawn "flatpak" "run" "com.behringer.XAirEdit"; }
-    Super+Alt+A hotkey-overlay-title="Run Affinity Canva" { spawn "gtk-launch" "Affinity"; }
+    Super+Alt+A hotkey-overlay-title="Run Affinity Canva" { spawn "gtk-launch" "affinity.desktop"; }
     Super+L     hotkey-overlay-title="Lock Screen" { spawn "noctalia" "msg" "session" "lock"; }
+    Super+Alt+V hotkey-overlay-title="Launch Pavucontrol-QT" { spawn "pavucontrol-qt"; }
+
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
