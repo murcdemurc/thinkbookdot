@@ -1,5 +1,5 @@
-backup_time:      2026-08-25T12:32:41+02:00
+backup_time:      2026-08-27T14:06:03+02:00
 profile_dir:      /home/murc/.librewolf/Profiles/Default
-librewolf_running: false
-librewolf_version: Mozilla LibreWolf 153.0.1-1
+librewolf_running: true
+librewolf_version: LibreWolf 154.0-2
 excluded:         logins.json, key4.db, cert9.db, cookies, storage, caches, sessionstate
