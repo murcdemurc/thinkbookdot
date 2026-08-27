@@ -123,7 +123,7 @@ widget_order = [
         stat2 = "ram_pct"
 
 [location]
-auto_locate = true
+address = "Homburg saarland"
 
 [lockscreen]
 blur_intensity = 0.24999999441206455
