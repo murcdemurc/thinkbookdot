@@ -55,7 +55,7 @@ widget_order = [
         background = true
         background_opacity = 0.40000000000000002
         background_radius = 0
-        color = "secondary"
+        color = "primary"
 
     [desktop_widgets.widget.desktop-widget-0000000000000002]
     box_height = 128.0
@@ -72,7 +72,7 @@ widget_order = [
         background_radius = 0
         center_text = false
         clock_style = "digital"
-        color = "secondary"
+        color = "on_surface"
 
     [desktop_widgets.widget.desktop-widget-0000000000000003]
     box_height = 128.0
@@ -100,6 +100,7 @@ widget_order = [
         [desktop_widgets.widget.desktop-widget-0000000000000004.settings]
         background_opacity = 0.40000000000000002
         background_radius = 0
+        color2 = "on_surface"
         display = "graph"
         gauge_layout = "horizontal"
         stat = "cpu_usage"
@@ -117,6 +118,7 @@ widget_order = [
         [desktop_widgets.widget.desktop-widget-0000000000000005.settings]
         background_opacity = 0.40000000000000002
         background_radius = 0
+        color2 = "on_surface"
         display = "graph"
         gauge_layout = "vertical"
         stat = "swap_pct"
@@ -197,7 +199,7 @@ polkit_agent = true
 
 [theme]
 builtin = "Dracula"
-community_palette = "Everforest"
+community_palette = "Gruvbox Material"
 source = "community"
 wallpaper_scheme = "m3-content"
 
