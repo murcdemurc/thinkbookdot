@@ -203,7 +203,7 @@ wallpaper_scheme = "m3-content"
 
     [theme.templates]
     builtin_ids = [ "alacritty", "btop", "gtk3", "gtk4", "ghostty", "kcolorscheme", "niri", "qt" ]
-    community_ids = [ "spicetify", "fuzzel" ]
+    community_ids = [ "opencode", "spicetify", "neovim", "fuzzel" ]
 
 [wallpaper]
 directory = "/home/murc/Pictures/Wallpapers"
