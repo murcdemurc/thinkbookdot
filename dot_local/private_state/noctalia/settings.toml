@@ -55,7 +55,7 @@ widget_order = [
         background = true
         background_opacity = 0.40000000000000002
         background_radius = 0
-        color = "primary"
+        color = "on_surface"
 
     [desktop_widgets.widget.desktop-widget-0000000000000002]
     box_height = 128.0
@@ -86,7 +86,7 @@ widget_order = [
         [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
         background_opacity = 0.40000000000000002
         background_radius = 0
-        color = "secondary"
+        color = "on_surface"
 
     [desktop_widgets.widget.desktop-widget-0000000000000004]
     box_height = 112.0
@@ -188,6 +188,10 @@ polkit_agent = true
 
     [shell.animation]
     speed = 1.9500000290572643
+
+    [shell.launcher]
+    categories = false
+    show_icons = false
 
     [shell.panel]
     launcher_position = "top_center"

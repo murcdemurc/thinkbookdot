@@ -2,6 +2,7 @@
 - name: Install leisure AUR packages
   kewlfft.aur.aur:
     name:
+      - librewolf-bin
       - deezer
     use: paru
   become: false
