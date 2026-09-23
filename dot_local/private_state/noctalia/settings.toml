@@ -18,7 +18,7 @@ position = "left"
 radius = 0
 radius_bottom_left = 0
 radius_top_left = 0
-start = [ "wallpaper", "clock" ]
+start = [ "clock", "spacer_2", "wallpaper", "bar" ]
 thickness = 28
 
 [battery]
@@ -184,7 +184,7 @@ temperature_day = 7500
 temperature_night = 4500
 
 [plugins]
-enabled = [ "blackbartblues/audio-switcher" ]
+enabled = [ "blackbartblues/audio-switcher", "yuuto/calculator" ]
 
     [[plugins.source]]
     kind = "git"
@@ -258,6 +258,9 @@ directory = "/home/murc/Pictures/Wallpapers"
     path = "/home/murc/Pictures/Wallpapers/mountain-village.png"
     theme_mode = "dark"
 
+[widget.bar]
+type = "yuuto/calculator:bar"
+
 [widget.clock]
 scale = 1.1500000000000001
 
@@ -276,6 +279,10 @@ hide_when_no_unread = true
 
 [widget.session]
 scale = 1.25
+
+[widget.spacer_2]
+length = 39
+type = "spacer"
 
 [widget.tray]
 match_adjacent_spacing = true
