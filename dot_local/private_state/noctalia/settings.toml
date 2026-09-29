@@ -32,9 +32,9 @@ schema_version = 2
 widget_order = [
     "desktop-widget-0000000000000001",
     "desktop-widget-0000000000000002",
-    "desktop-widget-0000000000000003",
     "desktop-widget-0000000000000004",
-    "desktop-widget-0000000000000005"
+    "desktop-widget-0000000000000005",
+    "desktop-widget-0000000000000006"
 ]
 
     [desktop_widgets.grid]
@@ -43,10 +43,10 @@ widget_order = [
     visible = true
 
     [desktop_widgets.widget.desktop-widget-0000000000000001]
-    box_height = 64.0
+    box_height = 304.0
     box_width = 352.0
     cx = 240.0
-    cy = 60.0
+    cy = 820.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -58,12 +58,14 @@ widget_order = [
         background_opacity = 0.40000000000000002
         background_radius = 0
         color = "on_surface"
+        forecast_days = 5
+        show_forecast = true
 
     [desktop_widgets.widget.desktop-widget-0000000000000002]
-    box_height = 128.0
+    box_height = 160.0
     box_width = 352.0
     cx = 240.0
-    cy = 172.0
+    cy = 108.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -78,27 +80,11 @@ widget_order = [
         clock_style = "digital"
         color = "on_surface"
 
-    [desktop_widgets.widget.desktop-widget-0000000000000003]
-    box_height = 128.0
-    box_width = 352.0
-    cx = 240.0
-    cy = 444.0
-    output = "eDP-1"
-    placement_height = 1080.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "media_player"
-
-        [desktop_widgets.widget.desktop-widget-0000000000000003.settings]
-        background_opacity = 0.40000000000000002
-        background_radius = 0
-        color = "on_surface"
-
     [desktop_widgets.widget.desktop-widget-0000000000000004]
     box_height = 112.0
     box_width = 176.0
     cx = 152.0
-    cy = 308.0
+    cy = 244.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -118,7 +104,7 @@ widget_order = [
     box_height = 112.0
     box_width = 176.0
     cx = 328.0
-    cy = 308.0
+    cy = 244.0
     output = "eDP-1"
     placement_height = 1080.0
     placement_width = 1920.0
@@ -133,6 +119,22 @@ widget_order = [
         gauge_layout = "vertical"
         stat = "swap_pct"
         stat2 = "ram_pct"
+
+    [desktop_widgets.widget.desktop-widget-0000000000000006]
+    box_height = 368.0
+    box_width = 352.0
+    cx = 240.0
+    cy = 484.0
+    output = "eDP-1"
+    placement_height = 1080.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "calendar"
+
+        [desktop_widgets.widget.desktop-widget-0000000000000006.settings]
+        background_opacity = 0.40000000000000002
+        background_radius = 0
+        show_events = false
 
 [location]
 address = "Homburg saarland"
@@ -197,7 +199,7 @@ enabled = [ "blackbartblues/audio-switcher", "yuuto/calculator" ]
     name = "community"
 
 [shell]
-corner_radius_scale = 0.80000001192092896
+corner_radius_scale = 0.0
 font_family = "JetBrainsMono NF"
 lang = "en"
 password_style = "random"
