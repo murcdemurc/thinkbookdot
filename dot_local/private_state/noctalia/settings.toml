@@ -11,12 +11,13 @@ tint_intensity = 0.04999999888241291
 background_opacity = 0.79999998211860657
 capsule = true
 capsule_opacity = 0.0
-capsule_padding = 2.0
+capsule_padding = 0.0
 capsule_radius = 0
-capsule_thickness = 0.79999998584389687
+capsule_thickness = 0.80999998562037945
 center = [ "workspaces" ]
 concave_edge_corners = false
 end = [ "media", "tray", "network", "bluetooth", "widget", "brightness", "battery", "control-center", "session" ]
+font_scale = 0.79999998956918716
 font_weight = 400
 margin_ends = 0
 position = "left"
@@ -24,7 +25,6 @@ radius = 0
 radius_bottom_left = 0
 radius_top_left = 0
 start = [ "clock", "spacer_2", "wallpaper", "bar" ]
-thickness = 28
 
 [battery]
 warning_threshold = 20
