@@ -17,7 +17,7 @@ capsule_thickness = 0.80999998562037945
 center = [ "workspaces" ]
 concave_edge_corners = false
 end = [ "media", "tray", "network", "bluetooth", "widget", "brightness", "battery", "control-center", "session" ]
-font_scale = 0.79999998956918716
+font_scale = 0.85999998822808266
 font_weight = 400
 margin_ends = 0
 position = "left"
@@ -80,8 +80,9 @@ widget_order = [
         [desktop_widgets.widget.desktop-widget-0000000000000002.settings]
         background = true
         background_opacity = 0.40000000000000002
+        background_padding = 0
         background_radius = 0
-        center_text = false
+        center_text = true
         clock_style = "digital"
         color = "on_surface"
 
@@ -205,7 +206,7 @@ enabled = [ "blackbartblues/audio-switcher", "yuuto/calculator" ]
 
 [shell]
 corner_radius_scale = 0.0
-font_family = "JetBrainsMono NF"
+font_family = "IosevkaTerm Nerd Font Mono"
 lang = "en"
 password_style = "random"
 polkit_agent = true
